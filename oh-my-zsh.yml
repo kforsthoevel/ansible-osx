@@ -1,0 +1,17 @@
+---
+- hosts: workstation
+
+  tasks:
+    - name: get oh-my-zsh script
+      sudo: false
+      get_url: url=http://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh
+               dest=/tmp/oh-my-zsh.sh
+
+    - name: change file permission to be executable
+      sudo: false
+      command: chmod u+x /tmp/oh-my-zsh.sh
+
+    - name: install zsh
+      sudo: false
+      script: /tmp/oh-my-zsh.sh
+      creates: "{{ lookup('env','USER') }}/.oh-my-zsh/oh-my-zsh.sh"

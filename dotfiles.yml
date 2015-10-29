@@ -1,0 +1,29 @@
+---
+- hosts: workstation
+
+  tasks:
+    - name: get my dotfiles
+      sudo: false
+      git: repo=https://github.com/{{ lookup('env','USER') }}/dotfiles.git
+           dest={{ lookup('env','HOME') }}/dotfiles
+
+    - name: install homebrew bundle
+      sudo: false
+      command: brew tap homebrew/bundle
+
+    - name: copy Brewfile to $HOME
+      sudo: false
+      copy: src={{ lookup('env','HOME') }}/dotfiles/Brewfile
+            dest={{ lookup('env','HOME') }}/Brewfile
+
+    - name: bundle brewfile
+      sudo: false
+      command: /usr/local/bin/brew bundle
+      args:
+        chdir: "{{ lookup('env','HOME') }}"
+
+    - name: Symlink dotfiles
+      sudo: false
+      command: /usr/local/bin/rcup -d dotfiles -x README.md -x LICENSE -x Brewfile
+      args:
+        chdir: "{{ lookup('env','HOME') }}"

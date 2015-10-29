@@ -1,0 +1,8 @@
+---
+- hosts: workstation
+
+  tasks:
+    - name: install rdio
+      mac_pkg: pkg_type=app
+               url=https://rdio0-a.akamaihd.net/media/static/desktop/mac/Rdio.dmg
+               archive_type=dmg archive_path=Rdio.app

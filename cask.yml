@@ -1,0 +1,8 @@
+---
+- hosts: workstation
+
+  tasks:
+    - name: install cask
+      sudo: false
+      command: /usr/local/bin/brew install caskroom/cask/brew-cask
+               creates=/usr/local/bin/brew-cask

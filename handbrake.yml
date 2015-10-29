@@ -1,0 +1,9 @@
+---
+- hosts: workstation
+
+  tasks:
+    - name: install handbrake
+      mac_pkg: pkg_type=app
+               url=http://handbrake.fr/rotation.php?file=HandBrake-0.10.2-MacOSX.6_GUI_x86_64.dmg
+               archive_type=dmg archive_path=HandBrake.app
+      sudo: yes

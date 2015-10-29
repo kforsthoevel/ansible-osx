@@ -1,0 +1,10 @@
+---
+- hosts: workstation
+
+  tasks:
+    - name: Set zsh as default shell
+      user: name={{ lookup('env','USER') }}
+            shell=/bin/zsh
+            group=staff
+            groups=admin,wheel,everyone,localaccounts
+            append=yes
