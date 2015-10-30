@@ -1,0 +1,9 @@
+---
+- hosts: workstation
+
+  tasks:
+    - name: install gpg suite
+      mac_pkg: pkg_type=pkg
+               url=https://releases.gpgtools.org/GPG_Suite-2015.09.dmg
+               archive_type=dmg
+               archive_path=Install.pkg
